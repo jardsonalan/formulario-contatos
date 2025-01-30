@@ -8,8 +8,6 @@ const pararEnvio = (evt:Event) => {
 
 const nome = ref('')
 const email = ref('')
-
-console.log(nome, email)
 </script>
 
 <template>
@@ -28,7 +26,6 @@ console.log(nome, email)
 
 <style scoped>
   .form-cadastro {
-    background-color: rgb(132, 181, 255);
     padding: 10px;
     display: flex;
     flex-direction: column;
@@ -39,17 +36,30 @@ console.log(nome, email)
     display: flex;
     flex-direction: column;
     width: 80%;
-    margin: 0 auto;
+    margin: 5px 0;
+  }
+
+  .form-cadastro > .nome-input > label, .form-cadastro > .email-input > label {
+    color: white;
+    margin: 0 0 8px 0;
+    font-weight: bold;
   }
 
   .form-cadastro > .nome-input > input, .form-cadastro > .email-input > input {
-    padding: 4px;
+    padding: 5px;
+    font-size: 16px;
+    border: none;
   }
 
   .form-cadastro > button {
     margin: 10px 0 0 0;
-    padding: 6px;
+    padding: 8px;
     width: 80%;
     cursor: pointer;
+    border: none;
+    background-color: #2c7553;
+    color: white;
+    font-weight: bold;
+    font-size: 17px;
   }
 </style>
