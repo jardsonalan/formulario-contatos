@@ -2,23 +2,26 @@
 <script setup lang="ts">
 import { ref } from 'vue';
 
-const pararEnvio = (evt:Event) => {
-  evt.preventDefault()
-}
-
 const nome = ref('')
 const email = ref('')
+
+const pararEnvio = (evt:Event) => {
+  evt.preventDefault()
+  nome.value = ''
+  email.value = ''
+}
+
 </script>
 
 <template>
   <form class="form-cadastro" @submit="pararEnvio">
     <div class="nome-input">
       <label for="nome">Nome</label>
-      <input type="text" id="nome" v-model="nome">
+      <input type="text" id="nome" v-model="nome" placeholder="Informe seu nome">
     </div>
     <div class="email-input">
       <label for="email" id="email">E-mail</label>
-      <input type="text" id="email" v-model="email">
+      <input type="text" id="email" v-model="email" placeholder="Informe seu e-mail">
     </div>
     <button @click="$emit('cadastrar', nome, email)">Cadastrar</button>
   </form>

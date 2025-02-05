@@ -1,20 +1,48 @@
 <script setup lang="ts">
 import Form from './components/Form.vue';
-import { ref } from 'vue';
+import { ref, onMounted } from 'vue';
+import axios from 'axios';
 
 type Dados = {
+  id: number,
   nome: string,
   email: string
 }
 
 const listaDados = ref<Dados[]>([])
 
-const adicionarPessoas = (nome: string, email: string) => {
-  listaDados.value.push({
-    nome: nome,
-    email: email
-  })
+async function adicionarPessoas (nome: string, email: string) {
+  if (nome !== '' && email !== '') {
+    // listaDados.value.push({
+    //   nome: nome,
+    //   email: email
+    // })
+
+    await axios.post('http://localhost:3000/contatos', {
+      nome,
+      email,
+    })
+
+    await listarContatos()
+  }
 }
+
+async function listarContatos() {
+  const resultado = await axios.get('http://localhost:3000/contatos')
+
+  if (resultado.status === 200) {
+    listaDados.value = resultado.data
+  }
+  // console.log(resultado)
+}
+
+async function deletarContatos(id: number) {
+  await axios.delete(`http://localhost:3000/contatos/${id}`)
+
+  await listarContatos()
+}
+
+onMounted(listarContatos)
 </script>
 
 <template>
@@ -40,6 +68,7 @@ const adicionarPessoas = (nome: string, email: string) => {
           <td>
             {{ item.email }}
           </td>
+          <button @click="deletarContatos(item.id)">Deletar</button>
         </tr>
       </tbody>
     </table>
