@@ -1,6 +1,7 @@
 <!-- eslint-disable vue/multi-word-component-names -->
 <script setup lang="ts">
 import { ref } from 'vue';
+import { VTextField } from 'vuetify/components';
 
 const nome = ref('')
 const email = ref('')
@@ -14,21 +15,17 @@ const pararEnvio = (evt:Event) => {
 </script>
 
 <template>
-  <form class="form-cadastro" @submit="pararEnvio">
-    <div class="nome-input">
-      <label for="nome">Nome</label>
-      <input type="text" id="nome" v-model="nome" placeholder="Informe seu nome">
-    </div>
-    <div class="email-input">
-      <label for="email" id="email">E-mail</label>
-      <input type="text" id="email" v-model="email" placeholder="Informe seu e-mail">
-    </div>
-    <button @click="$emit('cadastrar', nome, email)">Cadastrar</button>
-  </form>
+    <VForm class="mt-8" @submit="pararEnvio">
+      <VTextField type="text" id="nome" v-model="nome" label="Nome"/>
+
+      <VTextField type="text" id="email" v-model="email" label="E-mail"/>
+
+      <VBtn class="w-100" prepend-icon="mdi-plus-circle-outline" @click="$emit('cadastrar', nome, email)">Cadastrar</VBtn>
+    </VForm>
 </template>
 
 <style scoped>
-  .form-cadastro {
+  /* .form-cadastro {
     padding: 10px;
     display: flex;
     flex-direction: column;
@@ -64,5 +61,5 @@ const pararEnvio = (evt:Event) => {
     color: white;
     font-weight: bold;
     font-size: 17px;
-  }
+  } */
 </style>

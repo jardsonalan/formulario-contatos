@@ -46,37 +46,54 @@ onMounted(listarContatos)
 </script>
 
 <template>
-  <Form
-    @cadastrar="adicionarPessoas"
-  />
-  <div class="container-tabela">
-    <table>
-      <thead>
-        <tr>
-          <th>Nome</th>
-          <th>E-mail</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr
-          v-for="(item, index) in listaDados"
-          :key="index"
-        >
-          <td>
-            {{ item.nome }}
-          </td>
-          <td>
-            {{ item.email }}
-          </td>
-          <button @click="deletarContatos(item.id)">Deletar</button>
-        </tr>
-      </tbody>
-    </table>
-  </div>
+  <VContainer>
+    <VRow justify="center">
+      <VCol cols="6">
+        <Form
+          @cadastrar="adicionarPessoas"
+        />
+      </VCol>
+    </VRow>
+    <VRow>
+      <VCol>
+        <h2 class="text-center mt-5">Lista de Contatos</h2>
+        <div class="container-tabela mt-3">
+          <VTable>
+            <thead>
+              <tr>
+                <th class="text-center border">Nome</th>
+                <th class="text-center border">E-mail</th>
+                <th></th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr
+                v-for="(item, index) in listaDados"
+                :key="index"
+              >
+                <td class="text-center border">
+                  {{ item.nome }}
+                </td>
+                <td class="text-center border">
+                  {{ item.email }}
+                </td>
+                <td><VBtn icon="mdi-delete" density="compact" color="error" variant="text" @click="deletarContatos(item.id)"/></td>
+              </tr>
+            </tbody>
+          </VTable>
+        </div>
+      </VCol>
+    </VRow>
+  </VContainer>
 </template>
 
 <style scoped>
 .container-tabela {
+  height: 300px;
+  overflow-y: auto;
+}
+
+/* .container-tabela {
   height: 300px;
   overflow-y: auto;
   margin: 10px 0 0 0;
@@ -91,16 +108,15 @@ table {
   background-color: #4b9673;
 }
 
-table th {
-  position: sticky;
-  top: 0;
-  background-color: #327a58;
-  color: #8becbf;
-}
 
 table td, table th {
   border: 1px solid #a1ecc9;
   padding: 8px;
   font-size: 16px;
-}
+  } */
+
+  table th {
+    background-color: #327a58;
+    color: #8becbf;
+  }
 </style>
